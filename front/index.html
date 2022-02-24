@@ -10,6 +10,7 @@
     inserire password:
     <input type="password" id="pwd" placeholder="password" />
     <button id="b1">invia</button>
+    <button id="up"></button>
     <script>
       $("#b1").click(function () {
         var mail = $("#mail").val();
@@ -33,6 +34,19 @@
           });
         }
       });
+      $("#b2").click(function(){
+        $.ajax({
+          url:"http://localhost:3000/api/user";
+
+        })
+      })
+      $("#up").click(function(){
+        var mail=$("#mail").val();
+        var password=$("#pwd").val();
+        if(mail && password){
+          
+        }
+      })
     </script>
   </body>
 </html>
