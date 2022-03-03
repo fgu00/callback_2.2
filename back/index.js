@@ -11,11 +11,18 @@ var port = 3000;
 const connection = mysql.createConnection({
   host: 'russo.salvatore.tave.osd',
   user: 'c190_salvo',
-  database: 'c190_primo'
+  database: 'c190_primo',
+  password: "Az-17694"
 });
 
 apiServer.listen(port, host, () => {
   console.log("Server partito: http://%s:%d/", host, port);
+  connection.query(
+    'SELECT * FROM c190_primo.users where email="salvatore" and password="russo"',
+    function(results) {
+      console.log(results); // results contains rows returned by server
+    }
+  );
 });
 
 apiServer.get("/api/login", (req, res) => {
