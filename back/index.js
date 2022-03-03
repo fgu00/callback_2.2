@@ -4,9 +4,15 @@ var cors = require("cors");
 apiServer.use(cors());
 var fs = require("fs");
 const { stringify } = require("querystring");
+const mysql = require('mysql2');
 
 var host = "localhost";
 var port = 3000;
+const connection = mysql.createConnection({
+  host: 'russo.salvatore.tave.osd',
+  user: 'c190_salvo',
+  database: 'c190_primo'
+});
 
 apiServer.listen(port, host, () => {
   console.log("Server partito: http://%s:%d/", host, port);
