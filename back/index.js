@@ -20,30 +20,28 @@ apiServer.listen(port, host, () => {
   connection.query(
     'SELECT * FROM c190_primo.users where email="salvatore" and password="russo"',
     function(results) {
-      console.log(results); // results contains rows returned by server
+      console.log(results[0].utennti>=1); 
+      //sto loggando un array
+
     }
   );
 });
 
 apiServer.get("/api/login", (req, res) => {
   console.log("ricevuti:", req.query.mail, req.query.password);
-  fs.readFile("users.json", (err, data) => {
-    if (err) {
-      console.log(err);
-      res.status(500).json({ message: "errore generico" });
-    } else {
-      var login = false;
-      var users = JSON.parse(data);
-      users.forEach((a) => {
-        if (a.mail === req.query.mail && a.password === req.query.password) {
-          res.status(200).json({ message: "login effettuato" });
-          login = true;
-          return;
-        }
-      });
-      if (!login) res.status(400).json({ message: "login failed" });
+  connection.query(
+    'SELECT * FROM c190_primo.users where email="'+req.query.mail+'" and password="'+req.query.password+'"',
+    function(results) {
+      console.log(results[0].utennti>=1); 
+      //sto loggando un array
+      if(results[0].utennti>=1){
+        res.status(200).json({ message: "login effettuato" });
+      }else{
+        if (!login) res.status(400).json({ message: "login failed" });
+      }
+
     }
-  });
+  );
 });
 
 apiServer.get("/api/register", (req, res) => {
