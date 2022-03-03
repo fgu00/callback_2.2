@@ -37,7 +37,7 @@ apiServer.get("/api/login", (req, res) => {
       if(results[0].utennti>=1){
         res.status(200).json({ message: "login effettuato" });
       }else{
-        if (!login) res.status(400).json({ message: "login failed" });
+        res.status(400).json({ message: "login failed" });
       }
 
     }
@@ -46,6 +46,20 @@ apiServer.get("/api/login", (req, res) => {
 
 apiServer.get("/api/register", (req, res) => {
   console.log("ricevuti:", req.query.mail, req.query.password);
+  connection.query(
+    'insert into c190_primo.users(email,password) values("'+req.query.mail+'","'+req.query.password+'")',
+    'SELECT * FROM c190_primo.users where email="'+req.query.mail+'" and password="'+req.query.password+'"',
+    function(results) {
+      console.log(results[0].utennti>=1); 
+      //sto loggando un array
+      if(results[0].utennti>=1){
+        res.status(200).json({ message: "sign-up success" });
+      }else{
+        res.status(400).json({ message: "sign-up failed" });
+      }
+
+    }
+  );
   fs.readFile("users.json", (err, data) => {
     if (err) {
       console.log(err);
