@@ -13,7 +13,21 @@ crossorigin="anonymous">
       crossorigin="anonymous"
     ></script>
     <h1 id="h1">HOME</h1>
-    <script></script>
+    <script>
+       const connection = mysql.createConnection({
+       host: 'russo.salvatore.tave.osd',
+       user: 'c190_salvo',
+       database: 'c190_primo',
+       password: "Az-17694"
+       });
+       connection.query(
+       'SELECT * FROM c190_primo.voti where email="'+window.localStorage.getItem()+'"'
+       )
+      
+
+    }
+ 
+    </script>
 </body>
 </html> 
    
