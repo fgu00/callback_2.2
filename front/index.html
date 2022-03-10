@@ -36,6 +36,9 @@ crossorigin="anonymous">
             success: function (data) {
               console.log("success", data);
               $("body").css("background-color", "green");
+              window.location.href="home.html";
+              window.location.replace("home.html");
+              //unica differenza e che replace cancella dalla cronologia di navigazione la pagina su cui e stato scritto
             },
             error: function (data) {
               console.log("error", data);
